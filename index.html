@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>El Sabor del Chef</title>
-
   <style>
     body {
       font-family: sans-serif;
@@ -25,16 +24,6 @@
     p {
       font-size: 18px;
       margin-bottom: 30px;
-    }
-
-    #retell-widget-container {
-      width: 400px;
-      height: 600px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      position: relative;
     }
 
     button {
@@ -58,24 +47,29 @@
   <h1>Bienvenido a El Sabor del Chef 🍽️</h1>
   <p>Tu experiencia gastronómica fusión, ahora con atención inteligente 24/7.</p>
 
-  <div id="retell-widget-container">
-    <script id="retell-widget"
-      src="https://dashboard.retellai.com/retell-widget.js"
-      type="module"
-      data-public-key="public_key_53f3288025b7e78e3161e"
-      data-agent-id="agent_29a7741711c0b3593df62ab527"
-      data-agent-version="0"
-      data-title="¿En qué puedo ayudarte?"
-      data-logo-url="https://tusitio.com/logo.png"
-      data-color="#A44A3F"
-      data-open="true"
-      data-mode="embedded">
-    </script>
-  </div>
-
   <button onclick="restartChat()">Nueva conversación</button>
 
+  <!-- Script del chatbot flotante -->
+  <script id="retell-widget"
+    src="https://dashboard.retellai.com/retell-widget.js"
+    type="module"
+    data-public-key="public_key_53f3288025b7e78e3161e"
+    data-agent-id="agent_29a7741711c0b3593df62ab527"
+    data-agent-version="0"
+    data-title="¿En qué puedo ayudarte?"
+    data-logo-url="https://tusitio.com/logo.png"
+    data-color="#A44A3F">
+  </script>
+
+  <!-- Auto-abrir el chat automáticamente al cargar -->
   <script>
+    window.addEventListener('load', function () {
+      setTimeout(() => {
+        const btn = document.querySelector("button[aria-label='Abrir Retell']");
+        if (btn) btn.click();
+      }, 1000); // espera 1 segundo para asegurarse que el widget cargó
+    });
+
     function restartChat() {
       const widget = document.getElementById('retell-widget');
       if (widget) widget.remove();
@@ -90,12 +84,17 @@
       newWidget.setAttribute('data-title', '¿En qué puedo ayudarte?');
       newWidget.setAttribute('data-logo-url', 'https://tusitio.com/logo.png');
       newWidget.setAttribute('data-color', '#A44A3F');
-      newWidget.setAttribute('data-open', 'true');
-      newWidget.setAttribute('data-mode', 'embedded');
 
-      document.getElementById('retell-widget-container').appendChild(newWidget);
+      document.body.appendChild(newWidget);
+
+      // Reabrir después de reiniciar
+      setTimeout(() => {
+        const btn = document.querySelector("button[aria-label='Abrir Retell']");
+        if (btn) btn.click();
+      }, 1500);
     }
   </script>
 
 </body>
 </html>
+

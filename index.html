@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>El Sabor del Chef</title>
   <style>
     body {
@@ -34,6 +34,7 @@
       border-radius: 8px;
       cursor: pointer;
       font-size: 18px;
+      margin: 5px;
     }
 
     .chat-btn:hover {
@@ -53,6 +54,8 @@
   <p>Tu experiencia gastronómica fusión, ahora con atención inteligente 24/7.</p>
 
   <button class="chat-btn" onclick="location.reload()">Nueva conversación</button>
+  <button class="chat-btn" onclick="clearRetell()">Borrar conversaciones</button>
+
   <p class="note">Haz clic en el ícono de la esquina inferior derecha para hablar con nuestro asistente.</p>
 
   <!-- Script del widget de Retell -->
@@ -67,7 +70,30 @@
     data-color="#A44A3F">
   </script>
 
+  <script>
+    function clearRetell() {
+      // Borra claves en localStorage relacionadas con Retell
+      Object.keys(localStorage).forEach(key => {
+        if (key.toLowerCase().includes('retell')) {
+          localStorage.removeItem(key);
+          console.log(`localStorage eliminado: ${key}`);
+        }
+      });
+
+      // Borra claves en sessionStorage relacionadas con Retell
+      Object.keys(sessionStorage).forEach(key => {
+        if (key.toLowerCase().includes('retell')) {
+          sessionStorage.removeItem(key);
+          console.log(`sessionStorage eliminado: ${key}`);
+        }
+      });
+
+      alert('Conversaciones borradas. Por favor recarga la página para empezar de nuevo.');
+    }
+  </script>
+
 </body>
 </html>
+
 
 

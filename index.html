@@ -26,18 +26,17 @@
       margin-bottom: 30px;
     }
 
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
+    .chat-btn {
+      padding: 15px 30px;
       background-color: #a44a3f;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 18px;
     }
 
-    button:hover {
+    .chat-btn:hover {
       background-color: #902f2f;
     }
   </style>
@@ -47,9 +46,10 @@
   <h1>Bienvenido a El Sabor del Chef 🍽️</h1>
   <p>Tu experiencia gastronómica fusión, ahora con atención inteligente 24/7.</p>
 
-  <button onclick="restartChat()">Nueva conversación</button>
+  <button class="chat-btn" onclick="abrirChat()">Hablar con el Chef</button>
 
-  <!-- Script del chatbot flotante -->
+  <button class="chat-btn" style="margin-top: 20px;" onclick="location.reload()">Nueva conversación</button>
+
   <script id="retell-widget"
     src="https://dashboard.retellai.com/retell-widget.js"
     type="module"
@@ -61,40 +61,18 @@
     data-color="#A44A3F">
   </script>
 
-  <!-- Auto-abrir el chat automáticamente al cargar -->
   <script>
-    window.addEventListener('load', function () {
-      setTimeout(() => {
-        const btn = document.querySelector("button[aria-label='Abrir Retell']");
-        if (btn) btn.click();
-      }, 1000); // espera 1 segundo para asegurarse que el widget cargó
-    });
-
-    function restartChat() {
-      const widget = document.getElementById('retell-widget');
-      if (widget) widget.remove();
-
-      const newWidget = document.createElement('script');
-      newWidget.id = 'retell-widget';
-      newWidget.src = 'https://dashboard.retellai.com/retell-widget.js';
-      newWidget.type = 'module';
-      newWidget.setAttribute('data-public-key', 'public_key_53f3288025b7e78e3161e');
-      newWidget.setAttribute('data-agent-id', 'agent_29a7741711c0b3593df62ab527');
-      newWidget.setAttribute('data-agent-version', '0');
-      newWidget.setAttribute('data-title', '¿En qué puedo ayudarte?');
-      newWidget.setAttribute('data-logo-url', 'https://tusitio.com/logo.png');
-      newWidget.setAttribute('data-color', '#A44A3F');
-
-      document.body.appendChild(newWidget);
-
-      // Reabrir después de reiniciar
-      setTimeout(() => {
-        const btn = document.querySelector("button[aria-label='Abrir Retell']");
-        if (btn) btn.click();
-      }, 1500);
+    function abrirChat() {
+      const interval = setInterval(() => {
+        const boton = document.querySelector("button[aria-label='Abrir Retell']");
+        if (boton) {
+          boton.click();
+          clearInterval(interval);
+        }
+      }, 300);
     }
   </script>
-
 </body>
 </html>
+
 

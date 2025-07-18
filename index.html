@@ -1,9 +1,11 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>El Sabor del Chef</title>
+
+  <!-- ¡NO pongas Content-Security-Policy aquí! Se maneja en _headers -->
 
   <style>
     body {
@@ -71,30 +73,11 @@
     data-color="#A44A3F">
   </script>
 
-  <script>
-    function clearRetell() {
-      // Borra claves en localStorage relacionadas con Retell
-      Object.keys(localStorage).forEach(key => {
-        if (key.toLowerCase().includes('retell')) {
-          localStorage.removeItem(key);
-          console.log(`localStorage eliminado: ${key}`);
-        }
-      });
-
-      // Borra claves en sessionStorage relacionadas con Retell
-      Object.keys(sessionStorage).forEach(key => {
-        if (key.toLowerCase().includes('retell')) {
-          sessionStorage.removeItem(key);
-          console.log(`sessionStorage eliminado: ${key}`);
-        }
-      });
-
-      alert('Conversaciones borradas. Por favor recarga la página para empezar de nuevo.');
-    }
-  </script>
-
+  <!-- Script JS externo para evitar errores de CSP -->
+  <script src="main.js"></script>
 </body>
 </html>
+
 
 
 
